@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Devina/Semester 2/Databases/Sistem.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="200"/><column_width id="3" width="8537"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,13:mainsubscriptions"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="cards" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="82"/><column index="2" value="143"/><column index="3" value="152"/><column index="4" value="243"/><column index="5" value="206"/><column index="6" value="178"/><column index="7" value="99"/><column index="8" value="162"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="customer" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="82"/><column index="2" value="261"/><column index="3" value="163"/><column index="4" value="157"/><column index="5" value="222"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="items" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="82"/><column index="2" value="91"/><column index="3" value="83"/><column index="4" value="82"/><column index="5" value="136"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="shipping_addresses" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="82"/><column index="2" value="143"/><column index="3" value="82"/><column index="4" value="133"/><column index="5" value="234"/><column index="6" value="82"/><column index="7" value="133"/><column index="8" value="139"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats><column index="8" value=""/></display_formats><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="subscriptions" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="82"/><column index="2" value="143"/><column index="3" value="203"/><column index="4" value="273"/><column index="5" value="146"/><column index="6" value="265"/><column index="7" value="278"/><column index="8" value="265"/><column index="9" value="212"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE 'customer' (
+	`id` INTEGER PRIMARY KEY,
+    `email` VARCHAR (50),
+    `first_name` VARCHAR (50),
+    `last_name` VARCHAR (50),
+    `phone_number` VARCHAR (50)
+);
+
+CREATE TABLE `shipping_addresses` (
+  `id` INTEGER PRIMARY KEY,
+  `customer` INTEGER NOT NULL,
+  `title` TEXT NOT NULL, /* nama dari alamat, misalnya: rumah, kantor, rumah 2*/
+  `line1` TEXT NOT NULL,
+  `line2` TEXT,
+  `city` VARCHAR (50),
+  `province` VARCHAR (50),
+  `postocde` VARCHAR (50)
+);
+
+CREATE TABLE `subscriptions` (
+  `id` INTEGER PRIMARY KEY,
+  `customer` INTEGER NOT NULL,
+  `billing_period` INTEGER NOT NULL,
+  `billing_period_unit` TEXT NOT NULL CHECK (`billing_period_unit` IN ('MONTH', 'YEAR')), /* hanya bernilai 'MONTH', 'YEAR' */
+  `total_due` INTEGER NOT NULL,
+  `activated_at` DATETIME, /* timestamp dalam format YYYY-MM-DD hh:mm:ss */
+  `current_term_start` DATETIME, /* timestamp dalam format YYYY-MM-DD hh:mm:ss */
+  `current_term_end` DATETIME, /* timestamp dalam format YYYY-MM-DD hh:mm:ss */
+  `status` TEXT NOT NULL CHECK (`status` IN ('ACTIVE', 'CANCELLED', 'NON_RENEWING')) /* hanya bernilai 'ACTIVE', 'CANCELLED', 'NON_RENEWING' */
+);
+
+
+CREATE TABLE `subscription_items` (
+  `subscription` INTEGER,
+  `item` INTEGER,
+  `quantity` INTEGER NOT NULL,
+  `price` INTEGER NOT NULL,
+  `amount` INTEGER NOT NULL,
+  PRIMARY KEY (`subscription`, `item`)
+);
+
+CREATE TABLE `items` (
+  `id` INTEGER PRIMARY KEY,
+  `name` TEXT NOT NULL,
+  `price` INTEGER NOT NULL,
+  `type` TEXT NOT NULL CHECK (`type` IN ('PLAN', 'ADDON')), /* hanya bernilai 'plan', 'addon' */
+  `is_active` INTEGER NOT NULL /* hanya bernilai 0 dan 1 */
+);
+
+CREATE TABLE `cards` (
+  `id` INTEGER PRIMARY KEY,
+  `customer` INTEGER NOT NULL,
+  `card_type` TEXT NOT NULL CHECK (`card_type` IN ('VISA', 'MASTERCARD')), /* hanya bernilai 'visa', 'mastercard' */
+  `masked_number` TEXT NOT NULL,
+  `expiry_month` INTEGER NOT NULL, 
+  `expiry_year` INTEGER NOT NULL,
+  `status` TEXT NOT NULL CHECK (`status` IN ('VALID', 'EXPIRING', 'EXPIRED')), /* hanya bernilai 'valid', 'expiring', 'expired' */
+  `is_primary` INTEGER NOT NULL /* hanya bernilai 0 dan 1 */
+);
+
+</sql><sql name="SQL 2">INSERT INTO `shipping_addresses` (id, customer, title, line1, line2, city, province, postcode) VALUES
+(1, 1, 'Rumah', 'Jl. Merdeka 123', NULL, 'Jakarta', 'DKI Jakarta', '12345'),
+(2, 2, 'Kantor', 'Jl. Sudirman 456', 'Gedung A', 'Jakarta', 'DKI Jakarta', '67890'),
+(3, 3, 'Rumah 2', 'Jl. Diponegoro 789', 'Apartemen B', 'Surabaya', 'Jawa Timur', '23456'),
+(4, 4, 'Rumah', 'Jl. Gatot Subroto 101', NULL, 'Bandung', 'Jawa Barat', '34567'),
+(5, 5, 'Kantor', 'Jl. Thamrin 202', 'Lantai 3', 'Medan', 'Sumatera Utara', '45678');
+
+INSERT INTO `shipping_addresses` (id, customer, title, line1, line2, city, province, postocde) VALUES
+(1, 1, 'Rumah', 'Jl. Merdeka 123', NULL, 'Jakarta', 'DKI Jakarta', '12345'),
+(2, 2, 'Kantor', 'Jl. Sudirman 456', 'Gedung A', 'Jakarta', 'DKI Jakarta', '67890'),
+(3, 3, 'Rumah 2', 'Jl. Diponegoro 789', 'Apartemen B', 'Surabaya', 'Jawa Timur', '23456'),
+(4, 4, 'Rumah', 'Jl. Gatot Subroto 101', NULL, 'Bandung', 'Jawa Barat', '34567'),
+(5, 5, 'Kantor', 'Jl. Thamrin 202', 'Lantai 3', 'Medan', 'Sumatera Utara', '45678');
+
+INSERT INTO `subscription_items` (subscription, item, quantity, price, amount) VALUES
+(1, 1, 1, 100, 100),
+(1, 3, 2, 50, 100),
+(2, 2, 1, 200, 200),
+(3, 3, 1, 50, 50),
+(4, 4, 1, 30, 30),
+(5, 5, 1, 70, 70);
+
+INSERT INTO `items` (id, name, price, type, is_active) VALUES
+(1, 'Basic Plan', 100, 'PLAN', 1),
+(2, 'Premium Plan', 200, 'PLAN', 1),
+(3, 'Extra Storage', 50, 'ADDON', 1),
+(4, 'Custom Domain', 30, 'ADDON', 1),
+(5, 'Priority Support', 70, 'ADDON', 1);
+
+INSERT INTO `cards` (id, customer, card_type, masked_number, expiry_month, expiry_year, status, is_primary) VALUES
+(1, 1, 'VISA', '9878 7878 1231 1234', 12, 2024, 'VALID', 1),
+(2, 2, 'MASTERCARD', '9080 7482 2887 5678', 6, 2023, 'EXPIRED', 0),
+(3, 3, 'VISA', '4545 7676 7282 9012', 11, 2025, 'VALID', 1),
+(4, 4, 'MASTERCARD', '7676 8185 4351 3456', 3, 2024, 'EXPIRING', 0),
+(5, 5, 'VISA', '8756 3456 4237 7890', 7, 2026, 'VALID', 1);
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
