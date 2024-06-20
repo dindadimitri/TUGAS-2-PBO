@@ -20,7 +20,7 @@ Project ini bertujuan untuk membuat backend API untuk sistem pembayaran pembayar
 
 -GET/customers/{id}=> informasi pelanggan dan alamatnya<br>
 <code>http://localhost:9056/customer/1</code><br><br>
-<a href="url"><img src="![img/get customer 1.jpg](https://github.com/dindadimitri/TUGAS-2-PBO/blob/main/img/get%20customer%201.jpg)" height="auto" width="300" style="border-radius:10%"></a>
+<a href="url"><img src="![img/get customer 1.jpg](https://github.com/dindadimitri/TUGAS-2-PBO/blob/main/img/get%20customer%201.jpg)" height="300" width="600" style="border-radius:10%"></a>
 
 
 <h3>POST</h3>
