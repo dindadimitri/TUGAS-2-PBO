@@ -76,7 +76,7 @@ Gambar diatas merupakan tampilan dari pengujian method POST di Postman dengan me
 <a href="url"><img src="img/post subscription.jpg" height="300" width="600" style="border-radius:10%"></a><br>
 Gambar diatas merupakan tampilan berhasil dari membuat subscriptions baru dengan method POST dan melakukan pengujian di Postman.<br> 
 
-<b>POST/items/b>=> buat item baru<br>
+<b>POST/items</b>=> buat item baru<br>
 <code>http://localhost:9056/items</code><br>
 <a href="url"><img src="img/post items.jpg" height="300" width="600" style="border-radius:10%"></a><br>
 Gambar diatas merupakan tampilan berhasil dari membuat item baru dengan method POST dan melakukan pengujian di Postman.<br> 
@@ -85,12 +85,12 @@ Gambar diatas merupakan tampilan berhasil dari membuat item baru dengan method P
 <b>PUT/customers/{id}</b><br>
 <code>http://localhost:9056/customer</code><br>
 <a href="url"><img src="img/put customer.jpg" height="300" width="600" style="border-radius:10%"></a><br>
-Gambar diatas merupakan tampilan dari mengubah salah satu data customer dengan menggunakan method PUT dengan pengujian pada Postman.<br>
+Gambar diatas merupakan tampilan dari mengubah salah satu data customer dengan menggunakan method PUT dengan pengujian pada Postman.<br><br>
 
-<b>PUT/items/{id}</b><br>
+<b>PUT/items/{id} </b><br>
 <code>http://localhost:9056/items/6</code><br>
 <a href="url"><img src="img/put items id.jpg" height="300" width="600" style="border-radius:10%"></a><br>
-Gambar diatas merupakan tampilan dari mengupdate data pada table item pada nomor id enam yg sudah berhasil dengan method PUT dan melakukan pengujian di Postman.
+Gambar diatas merupakan tampilan dari mengupdate data pada table item pada nomor id enam yg sudah berhasil dengan method PUT dan melakukan pengujian di Postman.<br>
 
 <h3>DELETE</h3>
 <b>DELETE/items/{id}</b>=> mengapus data items<br>
