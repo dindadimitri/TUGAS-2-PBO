@@ -18,7 +18,7 @@ Data-data yang digunakan dalam sistem pembayaran subscription sederhana ini disi
 <b>GET/customers</b> => mendapatkan daftar semua pelanggan<br>
 <code>http://localhost:9056/customer</code><br>
 <a href="url"><img src="img/get customer.jpg" height="300" width="600" style="border-radius:10%"></a><br>
-Gambar diatas merupakan tampilan daftar semua data customer yang ada pada table customers dengan menggunakan method GET dengan pengujian pada Postman.<br> 
+Gambar diatas merupakan tampilan daftar semua data customer yang ada pada table customers dengan menggunakan method GET dengan pengujian pada Postman.<br><br> 
 
 <b>GET/customers/{id}</b>=> mendapatkan informasi pelanggan dan alamatnya<br>
 <code>http://localhost:9056/customer/1</code><br>
@@ -69,7 +69,7 @@ Gambar diatas merupakan tampilan dari salah satu informasi produk dalam table it
 <b>POST/customers</b>=> buat pelanggan baru<br>
 <code>http://localhost:9056/customer</code><br>
 <a href="url"><img src="img/post customer.jpg" height="300" width="600" style="border-radius:10%"></a><br>
-Gambar diatas merupakan tampilan dari pengujian method POST di Postman dengan menambahkan data customer baru.<br>
+Gambar diatas merupakan tampilan dari pengujian method POST di Postman dengan menambahkan data customer baru.<br><br>
 
 <b>POST/subscriptions</b>=> buat subscription baru beserta dengan id customer, shipping address, card, dan item yg dibeli<br>
 <code>http://localhost:9056/subscriptions</code><br>
